@@ -2,3 +2,5 @@ pandas
 scipy
 biopython
 rdkit
+scikit-learn
+sklearn
