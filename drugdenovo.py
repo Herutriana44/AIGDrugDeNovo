@@ -39,11 +39,19 @@ def export_dict_to_json(data, filename):
         print(f"An error occurred: {e}")
 
 # Definisikan nama file json
-filename = "drug_class_mapping.json"
+try:
+    filename = "drug_class_mapping.json"
 
-# Buka file json
-with open(filename, "r") as file:
-    drug_class_dict = json.load(file)
+    # Buka file json
+    with open(filename, "r") as file:
+        drug_class_dict = json.load(file)
+except:
+    # in google colab
+    filename = "/content/AIGDrugDeNovo/drug_class_mapping.json"
+
+    # Buka file json
+    with open(filename, "r") as file:
+        drug_class_dict = json.load(file)
 
 drug_class_dict = {str(x).lower():y for x,y in drug_class_dict.items()}
 
