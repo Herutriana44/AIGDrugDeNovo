@@ -24,7 +24,9 @@ except:
     with open(filename, "r") as file:
         dc = json.load(file)
 
+dc = {str(k).lower():v for k,v in dc.items()}
 dcr = {v:k for k,v in dc.items()}
+#print(dcr)
 
 def count_alphabets(string):
   """
@@ -55,14 +57,24 @@ def exctraction_feature(string):
     return feature
 
 def predict(string):
-    filename = "drug_nb_model.pkl"
+    try:
+      filename = "drug_nb_model.pkl"
 
-    # Buka file pickle
-    with open(filename, "rb") as file:
-        # Load model dari file
-        model = pickle.load(file)
+      # Buka file pickle
+      with open(filename, "rb") as file:
+          # Load model dari file
+          model = pickle.load(file)
 
-    res = model.predict([exctraction_feature(string)])
+      res = model.predict([exctraction_feature(string)])
+    except:
+      filename = "/content/AIGDrugDeNovo/drug_nb_model.pkl"
+
+      # Buka file pickle
+      with open(filename, "rb") as file:
+          # Load model dari file
+          model = pickle.load(file)
+
+      res = model.predict([exctraction_feature(string)])
 
     return res
 
@@ -111,6 +123,7 @@ class Generative:
      self.len_result = len_result
 
   def run(self):
+    print(self.drug_class)
     result = []
     result_target = {}
     dock_res = {}
