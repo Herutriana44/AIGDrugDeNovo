@@ -15,8 +15,14 @@ except:
 df['TargetName'] = df['TargetName'].dropna()
 df = df[df['DrugSeq'] != '-----'][df['Drug_Class_1'] != 185]
 df = df.reset_index(drop=True)
-with open("drug_class_mapping.json", "r") as file:
-    dc = json.load(file)
+try:
+    with open("drug_class_mapping.json", "r") as file:
+        dc = json.load(file)
+except:
+    # in google colab envinronment
+    filename = "/content/AIGDrugDeNovo/drug_class_mapping.json"
+    with open(filename, "r") as file:
+        dc = json.load(file)
 
 dcr = {v:k for k,v in dc.items()}
 
