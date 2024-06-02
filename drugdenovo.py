@@ -53,40 +53,43 @@ except:
     with open(filename, "r") as file:
         drug_class_dict = json.load(file)
 
+
 drug_class_dict = {str(x).lower():y for x,y in drug_class_dict.items()}
+# print(drug_class_dict)
 
-def main():
-  arguments = sys.argv[1:]
-  dc1 = None
-  dc2 = None
-  dc3 = None
-  dc4 = None
-  dc5 = None
-  dc6 = None
-  dc7 = None
+arguments = sys.argv[1:]
+dc1 = "none"
+dc2 = "none"
+dc3 = "none"
+dc4 = "none"
+dc5 = "none"
+dc6 = "none"
+dc7 = "none"
 
-  for arg in arguments:
-    key, value = arg.split("=")
-    if key == "dc1":
-      dc1 = value
-    elif key == "dc2":
-      dc2 = value
-    elif key == "dc3":
-      dc3 = value
-    elif key == "dc4":
-      dc4 = value
-    elif key == "dc5":
-      dc5 = value
-    elif key == "dc6":
-      dc6 = value
-    elif key == "dc7":
-      dc7 = value
+for arg in arguments:
+  key, value = arg.split("=")
+  if key == "dc1":
+    dc1 = value
+  elif key == "dc2":
+    dc2 = value
+  elif key == "dc3":
+    dc3 = value
+  elif key == "dc4":
+    dc4 = value
+  elif key == "dc5":
+    dc5 = value
+  elif key == "dc6":
+    dc6 = value
+  elif key == "dc7":
+    dc7 = value
+  else:
+    print("Perintah tidak dikenali")
 
-  drug_class = [dc1, dc2, dc3, dc4, dc5, dc6, dc7]
-  drug_class = [data[dc] for dc in drug_class]
-  print(drug_class)
-  generate = generative.Generative(drug_class)
-  res, target_res, dock_target = generate.run()
-  res_predict = {'drug_sequence' : res, 'drug_target' : target_res, 'drug_docking' : dock_target}
+drug_class = [dc1, dc2, dc3, dc4, dc5, dc6, dc7]
+drug_class = [drug_class_dict[dc] for dc in drug_class]
+print(drug_class)
+generate = generative.Generative(drug_class)
+res, target_res, dock_target = generate.run()
+res_predict = {'drug_sequence' : res, 'drug_target' : target_res, 'drug_docking' : dock_target}
 
-  export_dict_to_json(res_predict, f"{generate_random_code}.json")
+export_dict_to_json(res_predict, f"{generate_random_code()}.json")
