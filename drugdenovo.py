@@ -102,7 +102,11 @@ def DrugDeNovo(dc1="none", dc2="none", dc3="none", dc4="none", dc5="none", dc6="
     drug_class = [dc1, dc2, dc3, dc4, dc5, dc6, dc7]
     drug_class = [drug_class_dict[dc] for dc in drug_class]
     print(drug_class)
-    generate = generative.Generative(drug_class)
+    
+    try:
+      generate = generative.Generative(drug_class)
+    except:
+      generate = AIGDrugDeNovo.generative.Generative(drug_class)
     res, target_res, dock_target = generate.run()
     res_predict = {'drug_sequence' : res, 'drug_target' : target_res, 'drug_docking' : dock_target}
     filename_json = f"{generate_random_code()}.json"
