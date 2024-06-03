@@ -98,7 +98,7 @@ drug_class_dict = {str(x).lower():y for x,y in drug_class_dict.items()}
 
 # export_dict_to_json(res_predict, f"{generate_random_code()}.json")
     
-def DrugDeNovo(dc1="none", dc2="none", dc3="none", dc4="none", dc5="none", dc6="none", dc7="none"):
+def DrugDeNovo(dc1="none", dc2="none", dc3="none", dc4="none", dc5="none", dc6="none", dc7="none", dir_target="."):
     drug_class = [dc1, dc2, dc3, dc4, dc5, dc6, dc7]
     drug_class = [drug_class_dict[dc] for dc in drug_class]
     print(drug_class)
@@ -109,6 +109,6 @@ def DrugDeNovo(dc1="none", dc2="none", dc3="none", dc4="none", dc5="none", dc6="
       generate = AIGDrugDeNovo.generative.Generative(drug_class)
     res, target_res, dock_target = generate.run()
     res_predict = {'drug_sequence' : res, 'drug_target' : target_res, 'drug_docking' : dock_target}
-    filename_json = f"{generate_random_code()}.json"
+    filename_json = f"{dir_target}/{generate_random_code()}.json"
     export_dict_to_json(res_predict, filename_json)
     return filename_json
