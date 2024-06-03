@@ -1,7 +1,10 @@
 import os
 import pickle
 from scipy.constants import e
-import molecular_function as mf
+try:
+    import molecular_function as mf
+except:
+    import AIGDrugDeNovo.molecular_function as mf
 
 asset_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'asset')
 model_dir = os.path.join(asset_dir, 'model')
