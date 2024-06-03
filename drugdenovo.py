@@ -1,4 +1,7 @@
-import generative
+try:
+    import generative
+except:
+    import AIGDrugDeNovo.generative
 import sys
 import json
 import datetime
