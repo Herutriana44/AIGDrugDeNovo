@@ -97,35 +97,14 @@ drug_class_dict = {str(x).lower():y for x,y in drug_class_dict.items()}
 # res_predict = {'drug_sequence' : res, 'drug_target' : target_res, 'drug_docking' : dock_target}
 
 # export_dict_to_json(res_predict, f"{generate_random_code()}.json")
-
-class DrugDeNovo:
-    def __init__(self,dc1="none", dc2="none", dc3="none", dc4="none", dc5="none", dc6="none", dc7="none"):
-        self.dc1 = dc1
-        self.dc2 = dc2
-        self.dc3 = dc3
-        self.dc4 = dc4
-        self.dc5 = dc5
-        self.dc6 = dc6
-        self.dc7 = dc7
-        
-    # print(drug_class_dict)
     
-    # arguments = sys.argv[1:]
-    # dc1 = "none"
-    # dc2 = "none"
-    # dc3 = "none"
-    # dc4 = "none"
-    # dc5 = "none"
-    # dc6 = "none"
-    # dc7 = "none"
-
-    def run():
-        drug_class = [self.dc1, self.dc2, self.dc3, self.dc4, self.dc5, self.dc6, self.dc7]
-        drug_class = [drug_class_dict[dc] for dc in drug_class]
-        print(drug_class)
-        generate = generative.Generative(drug_class)
-        res, target_res, dock_target = generate.run()
-        res_predict = {'drug_sequence' : res, 'drug_target' : target_res, 'drug_docking' : dock_target}
-        filename_json = f"{generate_random_code()}.json"
-        export_dict_to_json(res_predict, filename_json)
-        return filename_json
+def DrugDeNovo(dc1="none", dc2="none", dc3="none", dc4="none", dc5="none", dc6="none", dc7="none"):
+    drug_class = [dc1, dc2, dc3, dc4, dc5, dc6, dc7]
+    drug_class = [drug_class_dict[dc] for dc in drug_class]
+    print(drug_class)
+    generate = generative.Generative(drug_class)
+    res, target_res, dock_target = generate.run()
+    res_predict = {'drug_sequence' : res, 'drug_target' : target_res, 'drug_docking' : dock_target}
+    filename_json = f"{generate_random_code()}.json"
+    export_dict_to_json(res_predict, filename_json)
+    return filename_json
