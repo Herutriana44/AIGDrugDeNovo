@@ -6,10 +6,11 @@ import json
 import warnings
 warnings.filterwarnings('ignore')
 
-import docking
 try:
+    import docking
     df = pd.read_csv('drugbank_drug_target_label_mapping_amino_acid_pair_manage2_vers.csv')
 except:
+    import AIGDrugDeNovo.docking
     # if in google colab environment
     df = pd.read_csv('/content/AIGDrugDeNovo/drugbank_drug_target_label_mapping_amino_acid_pair_manage2_vers.csv')
 df['TargetName'] = df['TargetName'].dropna()
